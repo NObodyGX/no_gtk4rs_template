@@ -81,15 +81,25 @@ impl NopNameApplication {
         let name = env!("CARGO_PKG_NAME");
         let url = env!("CARGO_PKG_HOMEPAGE");
         let author = env!("CARGO_PKG_AUTHORS");
+        let authors = if !author.contains(":") {
+            vec![author]
+        } else {
+            author.split(":").collect()
+        };
+        let main_author = if !author.contains(":") {
+            author
+        } else {
+            author.split_once(":").unwrap().0
+        };
 
         let window = self.active_window().unwrap();
         let dialog = adw::AboutDialog::builder()
             .application_icon(name)
             .application_name(name)
             .version(version)
-            .developer_name(author)
-            .developers(vec![author])
-            .copyright(format!("© 2024 {}", author))
+            .developer_name(main_author)
+            .developers(authors)
+            .copyright(format!("© 2024 {}", main_author))
             .website(url)
             .issue_url(format!("{url}/issues"))
             .license_type(gtk::License::MitX11)
