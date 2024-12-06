@@ -4,11 +4,11 @@ use std::process::{Command, Stdio};
 
 use crate::app;
 
+use adw::Application;
 use glib::{clone, Object};
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gio, glib};
-use adw::Application;
 
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
@@ -23,17 +23,21 @@ impl Window {
     }
 
     fn setup_callbacks(&self) {
-        self.imp().hello_button.connect_clicked(
-            clone!(@weak self as window => move |_| {
-                window.hello_callback()
-            }),
-        );
+        self.imp().hello_button.connect_clicked(glib::clone!(
+            #[weak(rename_to = window)]
+            self,
+            move |_parameter| {
+                window.hello_callback();
+            }
+        ));
 
-        self.imp()
-            .goodbye_button
-            .connect_clicked(clone!(@weak self as window => move |_| {
-                window.goodbye_callback()
-            }));
+        self.imp().goodbye_button.connect_clicked(glib::clone!(
+            #[weak(rename_to = window)]
+            self,
+            move |_parameter| {
+                window.goodbye_callback();
+            }
+        ));
     }
 
     fn hello_callback(&self) {
