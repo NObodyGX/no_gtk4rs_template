@@ -5,6 +5,8 @@ edition = "2021"
 authors = ["NObodyGX"]
 description = "write your package description"
 homepage = "https://github.com/nobodygx/nopname"
+repository = "https://github.com/nobodygx/nopname"
+keywords = ["gtk4"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
