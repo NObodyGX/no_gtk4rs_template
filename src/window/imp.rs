@@ -1,10 +1,12 @@
 use glib::subclass::InitializingObject;
 use gtk::subclass::prelude::*;
-use gtk::{glib, Button, CompositeTemplate, Label};
+use gtk::{glib, Button, CompositeTemplate, Label, MenuButton};
 
 #[derive(CompositeTemplate, Default)]
 #[template(resource = "/com/github/nobodygx/nopname/ui/main_window.ui")]
 pub struct Window {
+    #[template_child]
+    pub main_menu_button: TemplateChild<MenuButton>,
     #[template_child]
     pub hello_button: TemplateChild<Button>,
     #[template_child]
@@ -15,12 +17,16 @@ pub struct Window {
 
 #[glib::object_subclass]
 impl ObjectSubclass for Window {
-    const NAME: &'static str = "nopname";
+    const NAME: &'static str = "MainWindow";
     type Type = super::MainWindow;
     type ParentType = gtk::ApplicationWindow;
 
     fn class_init(klass: &mut Self::Class) {
         klass.bind_template();
+
+        klass.install_action("win.hello-to-world", None, |window, _, _| {
+            window.hello_callback();
+        });
     }
 
     fn instance_init(obj: &InitializingObject<Self>) {

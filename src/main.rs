@@ -1,11 +1,12 @@
 mod app;
+mod perferences;
 mod window;
 
+use app::NopNameApplication;
 use gtk::gio;
 use gtk::glib;
 use gtk::prelude::*;
 use rust_embed::Embed;
-use window::MainWindow;
 
 #[derive(Embed)]
 #[folder = "data_store"]
@@ -29,20 +30,17 @@ fn load_resource() {
 fn main() {
     load_resource();
 
-    // Create a new application
-    let app = adw::Application::builder()
-        .application_id("com.github.nobodygx.nopname")
-        .build();
-
-    // Connect to "activate" signal of `app`
-    app.connect_activate(build_ui);
-
-    // Run the application
+    let app = NopNameApplication::new(
+        "com.github.nobodygx.nopname",
+        &gio::ApplicationFlags::empty(),
+    );
+    app.connect_startup(|app| {
+        setup_shortcuts(app);
+    });
     app.run();
 }
 
-fn build_ui(app: &adw::Application) {
-    // Create a new custom window and show it
-    let win = MainWindow::new(app);
-    win.present();
+fn setup_shortcuts(app: &NopNameApplication) {
+    app.set_accels_for_action("app.quit", &["<Ctrl>q"]);
+    app.set_accels_for_action("win.hello-to-world", &["<Ctrl>h"]);
 }

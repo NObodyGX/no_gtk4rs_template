@@ -5,6 +5,8 @@ use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gio, glib};
 
+use crate::app::NopNameApplication;
+
 glib::wrapper! {
     pub struct MainWindow(ObjectSubclass<imp::Window>)
         @extends gtk::ApplicationWindow, gtk::Window, gtk::Widget,
@@ -13,7 +15,7 @@ glib::wrapper! {
 }
 
 impl MainWindow {
-    pub fn new(app: &adw::Application) -> Self {
+    pub fn new(app: &NopNameApplication) -> Self {
         Object::builder().property("application", app).build()
     }
 
