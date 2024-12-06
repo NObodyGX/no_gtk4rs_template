@@ -16,7 +16,7 @@ pub struct Window {
 #[glib::object_subclass]
 impl ObjectSubclass for Window {
     const NAME: &'static str = "nopname";
-    type Type = super::Window;
+    type Type = super::MainWindow;
     type ParentType = gtk::ApplicationWindow;
 
     fn class_init(klass: &mut Self::Class) {

@@ -6,5 +6,5 @@ This template was created by following the gtk4-rs book located at [https://gtk-
 
 ## usage
 
-1. replace `nopname` with `your_project_name`
-2. replace `nobodygx` with `your_author_name`
+1. replace `nopname` with `YOUR_PROJECT_NAME`, rename `data/nopname.gresource.xml` with `data/YOUR_PROJECT_NAME.gresource.xml`
+2. replace `nobodygx` with `MAIN_AUTHOR_NAME`

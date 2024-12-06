@@ -5,7 +5,7 @@ use gtk::gio;
 use gtk::glib;
 use gtk::prelude::*;
 use rust_embed::Embed;
-use window::Window;
+use window::MainWindow;
 
 #[derive(Embed)]
 #[folder = "data_store"]
@@ -31,7 +31,7 @@ fn main() {
 
     // Create a new application
     let app = adw::Application::builder()
-        .application_id("org.nobodygx.nopname")
+        .application_id("com.github.nobodygx.nopname")
         .build();
 
     // Connect to "activate" signal of `app`
@@ -43,6 +43,6 @@ fn main() {
 
 fn build_ui(app: &adw::Application) {
     // Create a new custom window and show it
-    let window = Window::new(app);
-    window.present();
+    let win = MainWindow::new(app);
+    win.present();
 }
