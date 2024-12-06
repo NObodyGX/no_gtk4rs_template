@@ -52,39 +52,6 @@ impl MainPreferences {
                 config.save();
             },
         ));
-
-        let expand_mode = imp.expand_mode.get();
-        expand_mode.connect_active_notify(clone!(
-            #[weak]
-            imp,
-            move |switch| {
-                let mut config = imp.config.borrow_mut();
-                config.flowchart.expand_mode = switch.is_active();
-                config.save();
-            },
-        ));
-
-        let cell_max_width = imp.cell_max_width.get();
-        cell_max_width.connect_value_notify(clone!(
-            #[weak]
-            imp,
-            move |spin| {
-                let mut config = imp.config.borrow_mut();
-                config.table.cell_max_width = spin.value() as i32;
-                config.save();
-            },
-        ));
-
-        let line_max_width = imp.line_max_width.get();
-        line_max_width.connect_value_notify(clone!(
-            #[weak]
-            imp,
-            move |spin| {
-                let mut config = imp.config.borrow_mut();
-                config.table.line_max_width = spin.value() as i32;
-                config.save();
-            },
-        ));
     }
 
     pub(crate) fn connect_font_changed<F: Fn(&Self) + 'static>(

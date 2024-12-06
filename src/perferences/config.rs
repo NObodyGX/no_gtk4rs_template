@@ -7,27 +7,12 @@ use std::{
 use serde::{Deserialize, Serialize};
 use toml;
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
-#[serde(deny_unknown_fields)]
-pub struct Flowchart {
-    pub expand_mode: bool,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
-#[serde(deny_unknown_fields)]
-pub struct Table {
-    pub cell_max_width: i32,
-    pub line_max_width: i32,
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
     pub theme_style: String,
     pub use_custom_font: bool,
     pub custom_font: String,
-    pub flowchart: Flowchart,
-    pub table: Table,
 }
 
 impl Default for Config {
@@ -36,19 +21,15 @@ impl Default for Config {
             theme_style: "system".to_string(), // system-light-dark
             use_custom_font: false,
             custom_font: "nolxgw".to_string(),
-            flowchart: Flowchart { expand_mode: false },
-            table: Table {
-                cell_max_width: 99,
-                line_max_width: 299,
-            },
         }
     }
 }
 
 impl Config {
     fn get_filename() -> PathBuf {
+        let name = "nopname";
         let home = homedir::my_home().unwrap().unwrap();
-        let filename = home.join(".config").join("asciibox").join("asciibox.toml");
+        let filename = home.join(".config").join(name).join(format!("{name}.toml"));
         return filename;
     }
 
@@ -94,11 +75,6 @@ mod tests {
             theme_style: "haha".to_string(),
             use_custom_font: false,
             custom_font: "hel".to_string(),
-            flowchart: Flowchart { expand_mode: false },
-            table: Table {
-                cell_max_width: 33,
-                line_max_width: 177,
-            },
         };
 
         let toml = toml::to_string(&config).unwrap();

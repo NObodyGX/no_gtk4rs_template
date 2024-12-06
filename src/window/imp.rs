@@ -27,6 +27,10 @@ impl ObjectSubclass for Window {
         klass.install_action("win.hello-to-world", None, |window, _, _| {
             window.hello_callback();
         });
+
+        klass.install_action("win.refresh_text_view_font", None, |window, _, _| {
+            window.hello_callback();
+        });
     }
 
     fn instance_init(obj: &InitializingObject<Self>) {

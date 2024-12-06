@@ -13,12 +13,6 @@ pub struct MainPreferences {
     pub use_custom_font: TemplateChild<Switch>,
     #[template_child]
     pub font: TemplateChild<FontDialogButton>,
-    #[template_child]
-    pub expand_mode: TemplateChild<Switch>,
-    #[template_child]
-    pub cell_max_width: TemplateChild<adw::SpinRow>,
-    #[template_child]
-    pub line_max_width: TemplateChild<adw::SpinRow>,
 
     pub config: RefCell<Config>,
 }
