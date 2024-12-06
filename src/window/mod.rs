@@ -1,11 +1,6 @@
 mod imp;
 
-use std::process::{Command, Stdio};
-
-use crate::app;
-
-use adw::Application;
-use glib::{clone, Object};
+use glib::Object;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gio, glib};

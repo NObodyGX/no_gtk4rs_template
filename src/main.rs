@@ -2,16 +2,36 @@ mod app;
 mod window;
 
 use gtk::gio;
+use gtk::glib;
 use gtk::prelude::*;
+use rust_embed::Embed;
 use window::Window;
 
+#[derive(Embed)]
+#[folder = "data_store"]
+struct Asset;
+
+fn load_resource() {
+    let fname = "nopname.gresource";
+    let resource = if Asset::get(fname).is_some() {
+        let emfile = Asset::get(fname).unwrap();
+        let emdata = emfile.data.into_owned();
+        let data = glib::Bytes::from_owned(emdata);
+        gio::Resource::from_data(&data).unwrap()
+    } else {
+        // gio::resources_register_include!("nopname.gresource")
+        //     .expect("Failed to register resources.");
+        panic!("no nopname.gresource found");
+    };
+    gio::resources_register(&resource);
+}
+
 fn main() {
-    // Register and include resources
-    gio::resources_register_include!("nopname.gresource").expect("Failed to register resources.");
+    load_resource();
 
     // Create a new application
     let app = adw::Application::builder()
-        .application_id("org.nobodygx.gtk4rstemplate")
+        .application_id("org.nobodygx.nopname")
         .build();
 
     // Connect to "activate" signal of `app`

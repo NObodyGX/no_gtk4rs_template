@@ -1,14 +1,9 @@
 use glib::subclass::InitializingObject;
-use gtk::prelude::*;
 use gtk::subclass::prelude::*;
-use gtk::{glib, Button, CompositeTemplate, Entry, Label};
-
-use std::cell::Cell;
-
-use crate::app;
+use gtk::{glib, Button, CompositeTemplate, Label};
 
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/org/nobodygx/nopname/ui/main_window.ui")]
+#[template(resource = "/com/github/nobodygx/nopname/ui/main_window.ui")]
 pub struct Window {
     #[template_child]
     pub hello_button: TemplateChild<Button>,
