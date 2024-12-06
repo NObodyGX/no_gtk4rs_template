@@ -5,4 +5,10 @@
         <file compressed="true" preprocess="xml-stripblanks">ui/preferences.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     </gresource>
+    <gresource prefix="/com/github/nobodygx/nopname/icons/scalable/apps/">
+        <file preprocess="xml-stripblanks" alias="nopname.svg">icons/hicolor/scalable/apps/nopname.svg</file>
+    </gresource>
+    <gresource prefix="/com/github/nobodygx/nopname/icons/symbolic/apps/">
+        <file preprocess="xml-stripblanks" alias="logo-symbolic.svg">icons/hicolor/symbolic/apps/nopname-symbolic.svg</file>
+    </gresource>
 </gresources>
