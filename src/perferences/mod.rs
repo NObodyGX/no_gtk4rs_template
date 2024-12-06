@@ -54,10 +54,7 @@ impl MainPreferences {
         ));
     }
 
-    pub(crate) fn connect_font_changed<F: Fn(&Self) + 'static>(
-        &self,
-        f: F,
-    ) -> glib::SignalHandlerId {
+    pub fn connect_font_changed<F: Fn(&Self) + 'static>(&self, f: F) -> glib::SignalHandlerId {
         self.connect_local("font-changed", true, move |values| {
             let obj = values[0].get().unwrap();
             f(obj);
