@@ -4,8 +4,8 @@ use adw::prelude::*;
 use gtk::glib::clone;
 use gtk::{gio, glib};
 
+use crate::main_window::MainWindow;
 use crate::perferences::MainPreferences;
-use crate::window::MainWindow;
 
 glib::wrapper! {
     pub struct NopNameApplication(ObjectSubclass<imp::NopNameApplication>)

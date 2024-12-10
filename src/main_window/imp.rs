@@ -4,7 +4,7 @@ use gtk::{glib, Button, CompositeTemplate, Label, MenuButton};
 
 #[derive(CompositeTemplate, Default)]
 #[template(resource = "/com/github/noa-name/nop-name/ui/main_window.ui")]
-pub struct Window {
+pub struct MainWindow {
     #[template_child]
     pub main_menu_button: TemplateChild<MenuButton>,
     #[template_child]
@@ -16,7 +16,7 @@ pub struct Window {
 }
 
 #[glib::object_subclass]
-impl ObjectSubclass for Window {
+impl ObjectSubclass for MainWindow {
     const NAME: &'static str = "MainWindow";
     type Type = super::MainWindow;
     type ParentType = gtk::ApplicationWindow;
@@ -38,7 +38,7 @@ impl ObjectSubclass for Window {
     }
 }
 
-impl ObjectImpl for Window {
+impl ObjectImpl for MainWindow {
     fn constructed(&self) {
         self.parent_constructed();
 
@@ -47,8 +47,8 @@ impl ObjectImpl for Window {
     }
 }
 
-impl WidgetImpl for Window {}
+impl WidgetImpl for MainWindow {}
 
-impl WindowImpl for Window {}
+impl WindowImpl for MainWindow {}
 
-impl ApplicationWindowImpl for Window {}
+impl ApplicationWindowImpl for MainWindow {}

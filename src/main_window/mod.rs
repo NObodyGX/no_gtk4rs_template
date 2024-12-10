@@ -8,7 +8,7 @@ use gtk::{gio, glib};
 use crate::app::NopNameApplication;
 
 glib::wrapper! {
-    pub struct MainWindow(ObjectSubclass<imp::Window>)
+    pub struct MainWindow(ObjectSubclass<imp::MainWindow>)
         @extends gtk::ApplicationWindow, gtk::Window, gtk::Widget,
         @implements gio::ActionGroup, gio::ActionMap, gtk::Accessible, gtk::Buildable,
                     gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;

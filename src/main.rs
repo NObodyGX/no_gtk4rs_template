@@ -1,6 +1,6 @@
 mod app;
+mod main_window;
 mod perferences;
-mod window;
 
 use app::NopNameApplication;
 use gtk::gio;
