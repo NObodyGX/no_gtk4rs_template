@@ -79,6 +79,7 @@ impl NopNameApplication {
     fn show_about(&self) {
         let version = env!("CARGO_PKG_VERSION");
         let name = env!("CARGO_PKG_NAME");
+        let app_name = "NopName";
         let url = env!("CARGO_PKG_HOMEPAGE");
         let author = env!("CARGO_PKG_AUTHORS");
         let authors = if !author.contains(":") {
@@ -95,7 +96,7 @@ impl NopNameApplication {
         let window = self.active_window().unwrap();
         let dialog = adw::AboutDialog::builder()
             .application_icon(name)
-            .application_name(name)
+            .application_name(app_name)
             .version(version)
             .developer_name(main_author)
             .developers(authors)
