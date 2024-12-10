@@ -50,7 +50,9 @@ class CaseConverter(object):
         else:
             self.data = self._split_data(name)
 
-    def to_case(self, mode):
+    def to_case(self, mode, use_origin=False):
+        if use_origin:
+            return self.name
         if mode == CaseConverter.Mode.Snake:
             return "_".join(self.data)
         if mode == CaseConverter.Mode.Kebab:
@@ -63,20 +65,37 @@ class CaseConverter(object):
             return "_".join([x.upper() for x in self.data])
         return self.name
 
-def make_project_name():
-    if len(sys.argv) > 2:
-        return sys.argv[1], sys.argv[2]
+class ProjectParam(object):
+    def __init__(self, projcet:str="", author:str="", keep_author:bool=False):
+        self.project = projcet
+        self.author = author
+        self.keep_author = keep_author
+
+def make_project_param() -> ProjectParam:
+    param = ProjectParam()
+
+    if len(sys.argv) > 3:
+        param.project = sys.argv[1]
+        param.author = sys.argv[2]
+        flag = str(sys.argv[3]).strip()
+        if flag in("Y", "Yes", "yes", "True", "true", "1"):
+            param.keep_author = True
+        return param
     project = input('enter new project name:')
+
     if not project:
         print("please input invalid project name")
         sys.exit()
+    param.project = project
     author = input('enter new author:')
     if not author:
         print("please input invalid author")
         sys.exit()
-    return project, author
-
-
+    param.author = author
+    keep_author_case = input('whether keep author case: Y/N')
+    if keep_author_case.strip() in("Y", "Yes", "yes", "True", "true", "1"):
+        param.keep_author = True
+    return param
 
 def travel_dir(r:str):
     files = []
@@ -87,9 +106,10 @@ def travel_dir(r:str):
             files.extend(travel_dir(entry.path))
     return files
 
-def do_make_project(project:str, author:str):
-    print(f"ready to make project: {project}")
-    cc = CaseConverter(project)
+def do_make_project():
+    param = make_project_param()
+    print(f"ready to make project: {param.project}")
+    cc = CaseConverter(param.project)
     idir = os.path.dirname(__file__)
     odir = os.path.join(os.path.dirname(os.path.dirname(__file__)), cc.to_case(CaseConverter.Mode.Snake))
     if not os.path.exists(odir):
@@ -104,30 +124,28 @@ def do_make_project(project:str, author:str):
         if not os.path.exists(os.path.dirname(ofullname)):
             os.makedirs(os.path.dirname(ofullname))
         shutil.copy2(ifullname, ofullname)
-        do_make_ifile(ofullname, project, author)
+        do_make_ifile(ofullname, param)
 
-def do_make_ifile(ofullname: str, project:str, author:str):
+def do_make_ifile(ofullname: str, param):
     with open(ofullname, mode='r', encoding='utf-8') as f:
         content = f.read()
-    pcc = CaseConverter(project)
-    acc = CaseConverter(author)
+    pcc = CaseConverter(param.project)
+    acc = CaseConverter(param.author)
     content = content.replace('nop_name', pcc.to_case(CaseConverter.Mode.Snake))
     content = content.replace('nop-name', pcc.to_case(CaseConverter.Mode.Kebab))
     content = content.replace('NopName', pcc.to_case(CaseConverter.Mode.Pascal))
     content = content.replace('nopName', pcc.to_case(CaseConverter.Mode.Camel))
     content = content.replace('NOP_NAME', pcc.to_case(CaseConverter.Mode.Upper))
-    content = content.replace('noa_name', acc.to_case(CaseConverter.Mode.Snake))
-    content = content.replace('noa-name', acc.to_case(CaseConverter.Mode.Kebab))
-    content = content.replace('NoaName', acc.to_case(CaseConverter.Mode.Pascal))
-    content = content.replace('noaName', acc.to_case(CaseConverter.Mode.Camel))
-    content = content.replace('NOA_NAME', acc.to_case(CaseConverter.Mode.Upper))
+    content = content.replace('noa_name', acc.to_case(CaseConverter.Mode.Snake, use_origin=param.keep_author))
+    content = content.replace('noa-name', acc.to_case(CaseConverter.Mode.Kebab, use_origin=param.keep_author))
+    content = content.replace('NoaName', acc.to_case(CaseConverter.Mode.Pascal, use_origin=param.keep_author))
+    content = content.replace('noaName', acc.to_case(CaseConverter.Mode.Camel, use_origin=param.keep_author))
+    content = content.replace('NOA_NAME', acc.to_case(CaseConverter.Mode.Upper, use_origin=param.keep_author))
     with open(ofullname, mode='w', encoding='utf-8') as f:
         f.write(content)
 
 def main():
-    project, author = make_project_name()
-    do_make_project(project, author)
-
+    do_make_project()
 
 if __name__ == "__main__":
     main()
