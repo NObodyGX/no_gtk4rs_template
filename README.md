@@ -6,5 +6,4 @@ This template was created by following the gtk4-rs book located at [https://gtk-
 
 ## usage
 
-1. replace `nopname` with `YOUR_PROJECT_NAME`, rename `data/nopname.gresource.xml` with `data/YOUR_PROJECT_NAME.gresource.xml`
-2. replace `nobodygx` with `MAIN_AUTHOR_NAME`
+run `python make_new_project.py` to create new project directory in parent dir.

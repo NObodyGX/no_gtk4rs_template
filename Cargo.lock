@@ -635,7 +635,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "nopname"
+name = "nop_name"
 version = "0.1.0"
 dependencies = [
  "glib-build-tools",

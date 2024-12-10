@@ -3,7 +3,7 @@ use gtk::subclass::prelude::*;
 use gtk::{glib, Button, CompositeTemplate, Label, MenuButton};
 
 #[derive(CompositeTemplate, Default)]
-#[template(resource = "/com/github/nobodygx/nopname/ui/main_window.ui")]
+#[template(resource = "/com/github/noa-name/nop-name/ui/main_window.ui")]
 pub struct Window {
     #[template_child]
     pub main_menu_button: TemplateChild<MenuButton>,

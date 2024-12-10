@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="com/github/noa-name/nop-name/">
+        <file compressed="true" preprocess="xml-stripblanks">ui/main_window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks">ui/preferences.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
+    </gresource>
+    <gresource prefix="/com/github/noa-name/nop-name/icons/scalable/apps/">
+        <file preprocess="xml-stripblanks" alias="nop_name.svg">icons/hicolor/scalable/apps/nop_name.svg</file>
+    </gresource>
+    <gresource prefix="/com/github/noa-name/nop-name/icons/symbolic/apps/">
+        <file preprocess="xml-stripblanks" alias="logo-symbolic.svg">icons/hicolor/symbolic/apps/nop_name-symbolic.svg</file>
+    </gresource>
+</gresources>

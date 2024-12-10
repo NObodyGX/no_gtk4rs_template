@@ -13,16 +13,16 @@ use rust_embed::Embed;
 struct Asset;
 
 fn load_resource() {
-    let fname = "nopname.gresource";
+    let fname = "nop_name.gresource";
     let resource = if Asset::get(fname).is_some() {
         let emfile = Asset::get(fname).unwrap();
         let emdata = emfile.data.into_owned();
         let data = glib::Bytes::from_owned(emdata);
         gio::Resource::from_data(&data).unwrap()
     } else {
-        // gio::resources_register_include!("nopname.gresource")
+        // gio::resources_register_include!("nop_name.gresource")
         //     .expect("Failed to register resources.");
-        panic!("no nopname.gresource found");
+        panic!("no nop_name.gresource found");
     };
     gio::resources_register(&resource);
 }
@@ -31,7 +31,7 @@ fn main() {
     load_resource();
 
     let app = NopNameApplication::new(
-        "com.github.nobodygx.nopname",
+        "com.github.noa-name.nop-name",
         &gio::ApplicationFlags::empty(),
     );
     app.connect_startup(|app| {

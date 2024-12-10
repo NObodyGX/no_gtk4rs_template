@@ -7,7 +7,7 @@ use std::{cell::RefCell, sync::OnceLock};
 use super::config::Config;
 
 #[derive(Debug, Default, CompositeTemplate)]
-#[template(resource = "/com/github/nobodygx/nopname/ui/preferences.ui")]
+#[template(resource = "/com/github/noa-name/nop-name/ui/preferences.ui")]
 pub struct MainPreferences {
     #[template_child]
     pub use_custom_font: TemplateChild<Switch>,

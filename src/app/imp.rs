@@ -28,8 +28,8 @@ impl ApplicationImpl for NopNameApplication {
         let app = obj.downcast_ref::<super::NopNameApplication>().unwrap();
         let window = app.create_window();
         window.set_default_size(1280, 720);
-        window.set_title(Some("nopname"));
-        window.set_icon_name(Some("nopname"));
+        window.set_title(Some("NopName"));
+        window.set_icon_name(Some("nop_name"));
         window.present();
     }
 }

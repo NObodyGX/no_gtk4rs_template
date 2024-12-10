@@ -1,11 +1,11 @@
 [package]
-name = "nopname"
+name = "nop_name"
 version = "0.1.0"
 edition = "2021"
-authors = ["NObodyGX"]
+authors = ["NopName"]
 description = "write your package description"
-homepage = "https://github.com/nobodygx/nopname"
-repository = "https://github.com/nobodygx/nopname"
+homepage = "https://github.com/noa-name/nop-name"
+repository = "https://github.com/noa-name/nop-name"
 keywords = ["gtk4"]
 license = "MIT"
 

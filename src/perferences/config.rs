@@ -27,7 +27,7 @@ impl Default for Config {
 
 impl Config {
     fn get_filename() -> PathBuf {
-        let name = "nopname";
+        let name = "nop_name";
         let home = homedir::my_home().unwrap().unwrap();
         let filename = home.join(".config").join(name).join(format!("{name}.toml"));
         return filename;
