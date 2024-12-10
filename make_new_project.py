@@ -125,8 +125,9 @@ def do_make_project():
             os.makedirs(os.path.dirname(ofullname))
         shutil.copy2(ifullname, ofullname)
         do_make_ifile(ofullname, param)
+    do_make_readme(odir, param)
 
-def do_make_ifile(ofullname: str, param):
+def do_make_ifile(ofullname: str, param: ProjectParam):
     with open(ofullname, mode='r', encoding='utf-8') as f:
         content = f.read()
     pcc = CaseConverter(param.project)
@@ -143,6 +144,16 @@ def do_make_ifile(ofullname: str, param):
     content = content.replace('NOA_NAME', acc.to_case(CaseConverter.Mode.Upper, use_origin=param.keep_author))
     with open(ofullname, mode='w', encoding='utf-8') as f:
         f.write(content)
+
+def do_make_readme(odir:str, param: ProjectParam):
+    pcc = CaseConverter(param.project)
+    with open(os.path.join(odir, 'README.md'), mode='w+', encoding='utf-8') as f:
+        f.write("\n".join([
+            f"# {pcc.to_case(CaseConverter.Mode.Pascal)}",
+            "",
+            "write your readme",
+            ""
+        ]))
 
 def main():
     do_make_project()
