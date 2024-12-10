@@ -2,7 +2,7 @@
 name = "nop_name"
 version = "0.1.0"
 edition = "2021"
-authors = ["NopName"]
+authors = ["NoaName"]
 description = "write your package description"
 homepage = "https://github.com/noa-name/nop-name"
 repository = "https://github.com/noa-name/nop-name"
