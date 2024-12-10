@@ -20,6 +20,7 @@ class CaseConverter(object):
         Camel = 2   # aaBb
         Pascal = 3  # AaBb
         Upper = 4   # AA_BB
+        Lower = 5   # aabb
 
     def __init__(self, name:str):
         self._init_data(name)
@@ -63,6 +64,8 @@ class CaseConverter(object):
             return "".join([x.capitalize() for x in self.data])
         if mode == CaseConverter.Mode.Upper:
             return "_".join([x.upper() for x in self.data])
+        if mode == CaseConverter.Mode.Lower:
+            return "".join(x.lower() for x in self.data)
         return self.name
 
 class ProjectParam(object):
@@ -137,11 +140,17 @@ def do_make_ifile(ofullname: str, param: ProjectParam):
     content = content.replace('NopName', pcc.to_case(CaseConverter.Mode.Pascal))
     content = content.replace('nopName', pcc.to_case(CaseConverter.Mode.Camel))
     content = content.replace('NOP_NAME', pcc.to_case(CaseConverter.Mode.Upper))
-    content = content.replace('noa_name', acc.to_case(CaseConverter.Mode.Snake, use_origin=param.keep_author))
-    content = content.replace('noa-name', acc.to_case(CaseConverter.Mode.Kebab, use_origin=param.keep_author))
-    content = content.replace('NoaName', acc.to_case(CaseConverter.Mode.Pascal, use_origin=param.keep_author))
-    content = content.replace('noaName', acc.to_case(CaseConverter.Mode.Camel, use_origin=param.keep_author))
-    content = content.replace('NOA_NAME', acc.to_case(CaseConverter.Mode.Upper, use_origin=param.keep_author))
+    if param.keep_author:
+        content = content.replace('noa_name', acc.to_case(CaseConverter.Mode.Lower))
+        content = content.replace('noa-name', acc.to_case(CaseConverter.Mode.Lower))
+        content = content.replace('NoaName', acc.to_case(CaseConverter.Mode.Pascal))
+        content = content.replace('noaName', acc.to_case(CaseConverter.Mode.Pascal))
+    else:
+        content = content.replace('noa_name', acc.to_case(CaseConverter.Mode.Snake))
+        content = content.replace('noa-name', acc.to_case(CaseConverter.Mode.Kebab))
+        content = content.replace('NoaName', acc.to_case(CaseConverter.Mode.Pascal))
+        content = content.replace('noaName', acc.to_case(CaseConverter.Mode.Camel))
+        content = content.replace('NOA_NAME', acc.to_case(CaseConverter.Mode.Upper))
     with open(ofullname, mode='w', encoding='utf-8') as f:
         f.write(content)
 
