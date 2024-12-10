@@ -102,7 +102,7 @@ def travel_dir(r:str):
     for entry in os.scandir(r):
         if entry.is_file():
             files.append(entry.path)
-        elif entry.is_dir() and entry.name not in [".git", ".vscode", 'target', 'data_store']:
+        elif entry.is_dir() and entry.name not in [".git", 'target', 'data_store']:
             files.extend(travel_dir(entry.path))
     return files
 
